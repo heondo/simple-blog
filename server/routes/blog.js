@@ -6,7 +6,7 @@ router.use(express.json());
 
 router.post('/', async (req, res, next) => {
     try {
-        console.log('what is up')
+        console.log('what is up')   
     } catch (error) {
         next(error);
     }

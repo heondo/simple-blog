@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SubmitBlogComponent} from './submit-blog/submit-blog.component'
+import { SubmitBlogComponent } from './submit-blog/submit-blog.component'
 
 
 const routes: Routes = [

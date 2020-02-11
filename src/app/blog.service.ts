@@ -9,6 +9,9 @@ import {Blog} from './blog'
   providedIn: 'root'
 })
 export class BlogService {
+  // TODO: create a blogPosts$ observable or w/e it was called here and have other components built off of this.
+  // not even sure how to do that LOL
+
   constructor(private http: HttpClient) { }
 
   private blogsURL = 'api/blog';

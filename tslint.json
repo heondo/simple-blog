@@ -71,6 +71,7 @@
       true,
       "single"
     ],
+    "semicolon": [true, "always"],
     "trailing-comma": false,
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,

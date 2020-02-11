@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') })
 
-const blogRoute = require('./routes/blog')
+const blogRoute = require('./routes/blog');
 
 app.use('/api/blog/', blogRoute);
 
