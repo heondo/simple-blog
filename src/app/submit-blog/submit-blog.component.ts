@@ -11,8 +11,12 @@ export class SubmitBlogComponent implements OnInit {
 
   constructor(private blogService: BlogService) { }
 
-  submitPost(): void {
-    this.blogService.addPost('this is a new post to check the server').subscribe();
+  submitPost(blogText: string): void {
+    const trimmedText = blogText.trim();
+    if (!trimmedText) {
+      return;
+    }
+    this.blogService.addPost(trimmedText).subscribe();
   }
 
   ngOnInit(): void {

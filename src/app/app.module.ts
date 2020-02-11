@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input'
+
 import { SubmitBlogComponent } from './submit-blog/submit-blog.component';
 import { BlogsListComponent } from './blogs-list/blogs-list.component';
 
@@ -21,6 +24,8 @@ import { BlogsListComponent } from './blogs-list/blogs-list.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
     HttpClientModule
   ],
   providers: [],

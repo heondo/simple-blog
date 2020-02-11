@@ -6,8 +6,12 @@ router.use(express.json());
 
 router.post('/', async (req, res, next) => {
     try {
-        console.log('what is up')   
+        const {blogText} = req.body;
+        console.log(blogText)
     } catch (error) {
+        if (!res.statusCode) {
+            res.status(404);
+        }
         next(error);
     }
 })

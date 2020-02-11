@@ -1,2 +1,10 @@
 <h2>Submit a new post</h2>
-<button (click)="submitPost()">Submit your post boy</button>
+<div class="example-container">
+    <form>
+        <mat-form-field>
+          <mat-label>Post a Thought</mat-label>
+          <textarea matInput #blogText placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+        <button (click)="submitPost(blogText.value);">Submit your post boy</button>
+      </form>
+</div>
