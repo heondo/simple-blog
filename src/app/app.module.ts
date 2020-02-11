@@ -3,14 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { SubmitBlogComponent } from './submit-blog/submit-blog.component';
+import { BlogsListComponent } from './blogs-list/blogs-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SubmitBlogComponent,
+    BlogsListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
