@@ -4,6 +4,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Blog} from './blog'
 
+interface ResponseBlogs {
+  success: boolean,
+  blogs: Blog[]
+}
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +38,9 @@ export class BlogService {
   };
 
   getBlogs(): Observable<Blog[]> {
-    return this.http.get<Blog[]>(this.blogsURL)
+    return this.http.get<ResponseBlogs>(this.blogsURL)
       .pipe(
-        tap(_ => console.log('fetched blogs')),
+        map(res => res.blogs || []),
         catchError(this.handleError<Blog[]>('getBlogs', []))
       );
   }

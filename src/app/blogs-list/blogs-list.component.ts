@@ -19,7 +19,7 @@ export class BlogsListComponent implements OnInit {
 
   getBlogs(): void {
     this.blogService.getBlogs().subscribe(
-      ({blogs}) => {
+      (blogs) => {
         this.blogs = blogs
       }
     )

@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     try {
         const query = {
             name: "get-posts",
-            text: "select * from posts limit 100",
+            text: "select * from posts order by date_created desc limit 100",
             values: []
         }
         const result = await client.query(query);
