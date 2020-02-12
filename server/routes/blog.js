@@ -4,6 +4,31 @@ const client = require('../db_connect');
 
 router.use(express.json());
 
+router.get('/', async (req, res, next) => {
+    try {
+        const query = {
+            name: "get-posts",
+            text: "select * from posts limit 100",
+            values: []
+        }
+        const result = await client.query(query);
+        if (!result.rowCount){
+            res.status(404);
+            throw new Error('No blogs to show');
+        }
+        res.status(200);
+        res.json({
+            success: true,
+            blogs: result.rows
+        })
+    } catch(error) {
+        if (!res.statusCode) {
+            res.status(500);
+        }
+        return next(error);
+    }
+})
+
 router.post('/', async (req, res, next) => {
     try {
         const {blogText} = req.body;
@@ -11,7 +36,6 @@ router.post('/', async (req, res, next) => {
             res.statusCode(403);
             throw new Error("No text to post")
         }
-        // console.log(blogText)
         const query = {
             name: "new-post",
             text: "insert into posts (date_created, content) values (NOW(), $1);",
@@ -22,7 +46,6 @@ router.post('/', async (req, res, next) => {
             res.statusCode(404)
             throw new Error("Failed to insert query")
         }
-        console.log(result)
     } catch (error) {
         if (!res.statusCode) {
             res.status(500);

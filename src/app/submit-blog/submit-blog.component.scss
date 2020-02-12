@@ -1,9 +1,14 @@
 .example-container {
     display: flex;
     justify-content: center;
+    margin-top: .5rem;
 }
 
-.blog-input{
+form {
     min-width: 350px;
     width: 90%;
+}
+
+mat-form-field {
+    width: 100%
 }

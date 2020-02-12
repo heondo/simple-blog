@@ -1,22 +1,12 @@
 <!-- <h2>Submit a new post</h2> -->
 <div class="example-container">
     <form>
-        <mat-form-field class="blog-input">
+        <mat-form-field>
             <mat-label>Post a Thought</mat-label>
             <textarea name="blogInput" required minlength="40" matInput #blogText placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
-        <button mat-flat-button color="primary" (click)="submitPost(blogText.value);">Submit your post boy</button>
+        <div>
+            <button mat-flat-button color="primary" (click)="submitPost(blogText.value);">Submit your post boy</button>
+        </div>
     </form>
-    <!-- <div *ngIf="blogInput.invalid && (blogInput.dirty || blogInput.touched)"
-            class="alert alert-danger">
-            <div *ngIf="blogInput.errors.required">
-                Name is required.
-            </div>
-            <div *ngIf="blogInput.errors.minlength">
-                Name must be at least 4 characters long.
-            </div>
-            <div *ngIf="blogInput.errors.forbiddenName">
-                Name cannot be Bob.
-            </div>
-        </div> -->
 </div>

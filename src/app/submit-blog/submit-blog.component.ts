@@ -16,7 +16,7 @@ export class SubmitBlogComponent implements OnInit {
     if (!trimmedText) {
       return;
     }
-    this.blogService.addPost(trimmedText).subscribe();
+    this.blogService.addBlog(trimmedText).subscribe();
   }
 
   ngOnInit(): void {

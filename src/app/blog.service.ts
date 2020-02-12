@@ -33,7 +33,15 @@ export class BlogService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  addPost(blogText: string): Observable<Blog> {
+  getBlogs(): Observable<Blog[]> {
+    return this.http.get<Blog[]>(this.blogsURL)
+      .pipe(
+        tap(_ => console.log('fetched blogs')),
+        catchError(this.handleError<Blog[]>('getBlogs', []))
+      );
+  }
+
+  addBlog(blogText: string): Observable<Blog> {
     return this.http.post(this.blogsURL, { blogText }, this.httpOptions).pipe(
       tap((addedBlog: Blog) => console.log(`added blog post with id =${addedBlog.id}`)),
       catchError(this.handleError<Blog>('addBlog'))
