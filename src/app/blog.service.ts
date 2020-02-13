@@ -42,7 +42,10 @@ export class BlogService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  getBlog(id: number): Observable<DetailedBlog> {
+  getBlog(id: number | string): Observable<DetailedBlog> {
+    if (typeof id === 'string') {
+      id = parseInt(id);
+    }
     const modifiedURL = `${this.blogsURL}/${id}`;
     return this.http.get<ResponseBlog>(modifiedURL).pipe(
       map(res => res.blog),

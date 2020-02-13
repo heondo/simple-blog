@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const {id} = req.params;
-        if (!id || !int(id)) {
+        if (!id || !parseInt(id)) {
             res.status(404);
             throw new Error("Invalid blog post ID")
         }
@@ -47,10 +47,10 @@ router.get('/:id', async (req, res, next) => {
             throw new Error(`Could not retrieve information froma blog with ID: ${id}`)
         }
         res.status(200);
-        console.log(result.rows[0])
+        // console.log(result.rows[0])
         res.json({
             success: true,
-            post: 'hi'
+            blog: result.rows[0]
         })
     } catch (error) {
         if (!res.statusCode) {
