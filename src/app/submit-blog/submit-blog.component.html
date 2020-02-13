@@ -3,7 +3,7 @@
     <form>
         <mat-form-field>
             <mat-label>Post a Thought</mat-label>
-            <textarea name="blogInput" required minlength="40" matInput #blogText placeholder="Ex. It makes me feel..."></textarea>
+            <textarea name="blogText" required minlength="40" matInput #blogText placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
         <div>
             <button mat-flat-button color="primary" (click)="submitPost(blogText.value);">Submit your post boy</button>

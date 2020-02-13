@@ -13,12 +13,14 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { SubmitBlogComponent } from './submit-blog/submit-blog.component';
 import { BlogsListComponent } from './blogs-list/blogs-list.component';
+import { BlogPostComponent } from './blog-post/blog-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SubmitBlogComponent,
-    BlogsListComponent
+    BlogsListComponent,
+    BlogPostComponent
   ],
   imports: [
     BrowserModule,

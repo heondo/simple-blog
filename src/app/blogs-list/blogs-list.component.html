@@ -1,7 +1,7 @@
 <div>
     <div *ngIf="blogs">
-        <div *ngFor="let blog of blogs">
+        <a routerLink="/blog/{{blog.id}}" *ngFor="let blog of blogs">
             {{blog.content}}
-        </div>
+        </a>
     </div>
 </div>

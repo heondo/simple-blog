@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable, of, ObservedValueOf } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Blog} from './blog'
+import {Blog, DetailedBlog} from './blog'
 
 interface ResponseBlogs {
   success: boolean,
   blogs: Blog[]
+}
+
+interface ResponseBlog {
+  success: true,
+  blog: DetailedBlog
 }
 
 @Injectable({
@@ -37,10 +42,21 @@ export class BlogService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  getBlog(id: number): Observable<DetailedBlog> {
+    const modifiedURL = `${this.blogsURL}/${id}`;
+    return this.http.get<ResponseBlog>(modifiedURL).pipe(
+      map(res => res.blog),
+      catchError(this.handleError<DetailedBlog>('getBlog'))
+    )
+  }
+
   getBlogs(): Observable<Blog[]> {
     return this.http.get<ResponseBlogs>(this.blogsURL)
       .pipe(
-        map(res => res.blogs || []),
+        map(res => {
+          console.log('fetched blogs');
+          return res.blogs || [];
+        }),
         catchError(this.handleError<Blog[]>('getBlogs', []))
       );
   }

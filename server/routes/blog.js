@@ -27,6 +27,37 @@ router.get('/', async (req, res, next) => {
         }
         return next(error);
     }
+});
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        if (!id || !int(id)) {
+            res.status(404);
+            throw new Error("Invalid blog post ID")
+        }
+        const query = {
+            name: `get-blog-${id}`,
+            text: "select p.id, p.date_created, p.content, c.comms from posts as p left join (select posts_id, json_agg(json_build_object('id', comments.id, 'date_created', comments.date_created, 'content', comments.content)) as comms from comments group by posts_id) as c on c.posts_id = p.id where p.id = $1",
+            values: [id]
+        };
+        const result = await client.query(query);
+        if (!result.rowCount) {
+            res.status(404);
+            throw new Error(`Could not retrieve information froma blog with ID: ${id}`)
+        }
+        res.status(200);
+        console.log(result.rows[0])
+        res.json({
+            success: true,
+            post: 'hi'
+        })
+    } catch (error) {
+        if (!res.statusCode) {
+            res.status(500);
+        }
+        return next(error);
+    }
 })
 
 router.post('/', async (req, res, next) => {
@@ -46,7 +77,41 @@ router.post('/', async (req, res, next) => {
             res.statusCode(404)
             throw new Error("Failed to insert query")
         }
+        res.status(200);
+        // TODO: You need to return the row that was created and send it back to the user...cause
     } catch (error) {
+        if (!res.statusCode) {
+            res.status(500);
+        }
+        return next(error);
+    }
+})
+
+router.post('/comment', async (req, res, next) => {
+    try {
+        const {postID, content} = req.body;
+        if (!postID || !content.trim() || content.length <= 4) {
+            res.status(403);
+            throw new Error("Invalid postid or comment content");
+        }
+        const query = {
+            name: "new-comment",
+            text: "insert into comments (post_id, date_created, content) values ($1, NOW(), $2)",
+            values: [postID, content]
+        }
+        const result = await client.query(query);
+        if (!result.rowCount) {
+            res.statusCode(404);
+            throw new Error("Couldn't insert comment into db");
+        }
+        res.status(200);
+        // TODO: I think i am getting scared creating the front end and backend with constantly
+        // testing and collaborating, so this should be good practice
+        res.json({
+            success: true,
+            comment: 'comment row'
+        })
+    } catch {
         if (!res.statusCode) {
             res.status(500);
         }
