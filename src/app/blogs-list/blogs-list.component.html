@@ -1,7 +1,16 @@
-<div>
-    <div *ngIf="blogs">
-        <a routerLink="/blog/{{blog.id}}" *ngFor="let blog of blogs">
+<div class="blogs-container" *ngIf="blogs">
+    <mat-card class="blog-card" routerLink="/blog/{{blog.id}}" *ngFor="let blog of blogs">
+        <mat-card-content>
             {{blog.content}}
-        </a>
-    </div>
+        </mat-card-content>
+        <mat-card-subtitle>{{blog.date_created}}</mat-card-subtitle>
+    </mat-card>
+    <!-- <mat-card *ngFor="let blog of blogs" class="blog-card">
+        <mat-card-content>
+            {{blog.content}}
+        </mat-card-content>
+    </mat-card> -->
+    <!-- <a routerLink="/blog/{{blog.id}}" *ngFor="let blog of blogs">
+        {{blog.content}}
+    </a> -->
 </div>

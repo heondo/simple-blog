@@ -10,6 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 import { SubmitBlogComponent } from './submit-blog/submit-blog.component';
 import { BlogsListComponent } from './blogs-list/blogs-list.component';
@@ -30,6 +31,7 @@ import { BlogPostComponent } from './blog-post/blog-post.component';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
     HttpClientModule
   ],
   providers: [],
