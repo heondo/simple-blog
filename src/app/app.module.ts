@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatIconModule} from '@angular/material/icon'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input'
@@ -32,6 +33,7 @@ import { BlogPostComponent } from './blog-post/blog-post.component';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
+    MatIconModule,
     HttpClientModule
   ],
   providers: [],

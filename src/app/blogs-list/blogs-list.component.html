@@ -3,14 +3,9 @@
         <mat-card-content>
             {{blog.content}}
         </mat-card-content>
-        <mat-card-subtitle>{{blog.date_created}}</mat-card-subtitle>
+        <mat-card-subtitle class="subtitle">
+            <div>{{blog.date_created | date:'MMM d, y, h:mm a'}}</div>
+            <div><mat-icon class="comment-icon">comment</mat-icon> {{blog.num_comments || 0}}</div>
+        </mat-card-subtitle>
     </mat-card>
-    <!-- <mat-card *ngFor="let blog of blogs" class="blog-card">
-        <mat-card-content>
-            {{blog.content}}
-        </mat-card-content>
-    </mat-card> -->
-    <!-- <a routerLink="/blog/{{blog.id}}" *ngFor="let blog of blogs">
-        {{blog.content}}
-    </a> -->
 </div>

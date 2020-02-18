@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     try {
         const query = {
             name: "get-posts",
-            text: "select * from posts order by date_created desc limit 100",
+            text: "select p.*, c.num_comments from posts as p left join (select posts_id, count(*) as num_comments from comments group by posts_id) as c on c.posts_id = p.id order by date_created desc limit 100",
             values: []
         }
         const result = await client.query(query);

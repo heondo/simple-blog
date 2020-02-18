@@ -1,7 +1,8 @@
 export interface Blog {
     id: number,
     date_created: Date,
-    content: string
+    content: string,
+    num_comments: number
 }
 
 export interface Comment {

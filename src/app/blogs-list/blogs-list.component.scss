@@ -1,6 +1,13 @@
 .blog-card {
     margin: .5rem 0;
     cursor: pointer;
+    .subtitle {
+        display: flex;
+        justify-content: space-between;
+    }
+    .comment-icon {
+        font-size: .8rem;
+    }
 }
 
 .blogs-container {
