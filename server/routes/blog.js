@@ -38,7 +38,7 @@ router.get('/:id', async (req, res, next) => {
         }
         const query = {
             name: `get-blog-${id}`,
-            text: "select p.id, p.date_created, p.content, c.comms from posts as p left join (select posts_id, json_agg(json_build_object('id', comments.id, 'date_created', comments.date_created, 'content', comments.content)) as comms from comments group by posts_id) as c on c.posts_id = p.id where p.id = $1",
+            text: "select p.id, p.date_created, p.content, c.comms from posts as p left join (select posts_id, json_agg(json_build_object('id', comments.id, 'date_created', comments.date_created, 'content', comments.content) order by comments.date_created desc) as comms from comments group by posts_id) as c on c.posts_id = p.id where p.id = $1",
             values: [id]
         };
         const result = await client.query(query);
@@ -69,7 +69,7 @@ router.post('/', async (req, res, next) => {
         }
         const query = {
             name: "new-post",
-            text: "insert into posts (date_created, content) values (NOW(), $1);",
+            text: "insert into posts (date_created, content) values (NOW(), $1) returning id, date_created, content;",
             values: [blogText]
         };
         const result = await client.query(query);
@@ -78,6 +78,11 @@ router.post('/', async (req, res, next) => {
             throw new Error("Failed to insert query")
         }
         res.status(200);
+        console.log(result.rows[0])
+        res.json({
+            success: true,
+            blog: result.rows[0]
+        })
         // TODO: You need to return the row that was created and send it back to the user...cause
     } catch (error) {
         if (!res.statusCode) {
@@ -96,7 +101,7 @@ router.post('/comment', async (req, res, next) => {
         }
         const query = {
             name: "new-comment",
-            text: "insert into comments (post_id, date_created, content) values ($1, NOW(), $2)",
+            text: "insert into comments (posts_id, date_created, content) values ($1, NOW(), $2) returning id, date_created, content",
             values: [postID, content]
         }
         const result = await client.query(query);
@@ -109,9 +114,9 @@ router.post('/comment', async (req, res, next) => {
         // testing and collaborating, so this should be good practice
         res.json({
             success: true,
-            comment: 'comment row'
+            comment: result.rows[0]
         })
-    } catch {
+    } catch(error) {
         if (!res.statusCode) {
             res.status(500);
         }

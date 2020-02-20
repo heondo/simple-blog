@@ -6,7 +6,7 @@
             <textarea name="blogText" required minlength="30" maxLength="1000" matInput #blogText placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
         <div>
-            <button mat-flat-button color="primary" (click)="submitPost(blogText.value);">Submit your post boy</button>
+            <button mat-flat-button color="primary" (click)="submitPost(blogText.value, $event);">Submit your post boy</button>
         </div>
     </form>
 </div>

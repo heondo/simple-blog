@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {BlogService} from '../blog.service';
 import {Blog} from '../blog'
 
@@ -9,14 +10,18 @@ import {Blog} from '../blog'
 })
 export class SubmitBlogComponent implements OnInit {
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService, private router: Router) { }
 
-  submitPost(blogText: string): void {
+  submitPost(blogText: string, $event): void {
+    $event.preventDefault();
     const trimmedText = blogText.trim();
     if (!trimmedText) {
       return;
     }
-    this.blogService.addBlog(trimmedText).subscribe();
+    this.blogService.addBlog(trimmedText).subscribe(
+      _ => this.router.navigateByUrl('/blogs-list')
+    );
+    
   }
 
   ngOnInit(): void {

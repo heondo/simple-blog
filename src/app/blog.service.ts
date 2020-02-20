@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, ObservedValueOf } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Blog, DetailedBlog} from './blog'
+import {Blog, DetailedBlog, Comment} from './blog'
 
 interface ResponseBlogs {
   success: boolean,
@@ -10,8 +10,13 @@ interface ResponseBlogs {
 }
 
 interface ResponseBlog {
-  success: true,
+  success: boolean,
   blog: DetailedBlog
+}
+
+interface ResponseComment {
+  success: boolean,
+  comment: Comment
 }
 
 @Injectable({
@@ -68,6 +73,19 @@ export class BlogService {
     return this.http.post(this.blogsURL, { blogText }, this.httpOptions).pipe(
       tap((addedBlog: Blog) => console.log(`added blog post with id =${addedBlog.id}`)),
       catchError(this.handleError<Blog>('addBlog'))
+    )
+  }
+
+  addComment(postID: number | string, content: string): Observable<Comment> {
+    const commentURL = this.blogsURL + '/comment'
+    return this.http.post<ResponseComment>(commentURL, {
+      postID, content
+    }, this.httpOptions).pipe(
+      map(res => {
+        console.log('added comment');
+        return res.comment;
+      }),
+      catchError(this.handleError<Comment>('addedComment'))
     )
   }
 }

@@ -5,7 +5,7 @@
         </mat-card-content>
         <mat-card-subtitle class="subtitle">
             <div>{{blog.date_created | date:'MMM d, y, h:mm a'}}</div>
-            <div><mat-icon class="comment-icon">comment</mat-icon> {{blog.num_comments || 0}}</div>
+            <div class="comments"><mat-icon class="icons">comment</mat-icon> {{blog.num_comments || 0}}</div>
         </mat-card-subtitle>
     </mat-card>
 </div>

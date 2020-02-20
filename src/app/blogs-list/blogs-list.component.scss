@@ -5,8 +5,15 @@
         display: flex;
         justify-content: space-between;
     }
-    .comment-icon {
-        font-size: .8rem;
+    .comments {
+        display: flex;
+        align-items: center;
+        .icons {
+            margin-right: 4px;
+            height: 16px;
+            width: 16px;
+            font-size: 1rem;
+        }
     }
 }
 
