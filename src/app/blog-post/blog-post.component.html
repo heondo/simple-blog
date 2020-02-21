@@ -13,10 +13,16 @@
     </form>
     Comments <span *ngIf="detailedBlog.comms">{{detailedBlog.comms.length}}</span>
     <div *ngIf="detailedBlog.comms">
-        <div *ngFor="let comm of detailedBlog.comms">
-            <mat-card-subtitle class="comment-date">
+        <div *ngFor="let comm of detailedBlog.comms" class="comment">
+            <!-- <span class="like">
+                <mat-icon class="icons">favorite</mat-icon>
+            </span> -->
+            <mat-card-subtitle class="date">
                 {{comm.date_created | date:'MM/dd/yy, h:mm a'}}
-            </mat-card-subtitle> {{comm.content}}
+            </mat-card-subtitle> 
+            <span class="content">
+                {{comm.content}}
+            </span>
         </div>
     </div>
 </mat-card>

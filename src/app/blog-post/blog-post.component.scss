@@ -4,7 +4,16 @@ mat-form-field {
     margin-right: .5rem;
 }
 
-.comment-date {
-    margin-bottom: 0;
-    display: inline-block;
+.comment {
+    display: flex;
+    flex-direction: row;
+    .date {
+        margin-bottom: 0;
+        display: inline-block;
+        flex:0 0 auto;
+        margin-right: .3rem;
+    }
+    // .icons {
+
+    // }
 }
