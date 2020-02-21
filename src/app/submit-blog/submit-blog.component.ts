@@ -10,7 +10,7 @@ import {Blog} from '../blog'
 })
 export class SubmitBlogComponent implements OnInit {
 
-  constructor(private blogService: BlogService, private router: Router) { }
+  contructor(private blogService: BlogService, private router: Router) { }
 
   submitPost(blogText: string, $event): void {
     $event.preventDefault();
