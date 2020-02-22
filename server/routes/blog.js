@@ -122,6 +122,22 @@ router.post('/comment', async (req, res, next) => {
         }
         return next(error);
     }
+});
+
+router.get('/search', async (req, res, next) => {
+    try {
+        const {q: searchTerm} = req.params;
+        console.log(searchTerm);
+        res.json({
+            success: true,
+            data: 'a request was received'
+        })
+    } catch (error) {
+        if (!res.statusCode) {
+            res.status(500);
+        }
+        return next(error);
+    }
 })
 
 module.exports = router;

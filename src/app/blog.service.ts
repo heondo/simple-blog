@@ -88,4 +88,16 @@ export class BlogService {
       catchError(this.handleError<Comment>('addedComment'))
     )
   }
+
+  searchBlogs(searchTerm: string) {
+    console.log(searchTerm)
+    const searchURL = this.blogsURL + `/search?q=${searchTerm}`;
+    return this.http.get(searchURL).pipe(
+      tap(res => {
+        console.log('added string');
+        // return res.comment;
+      }),
+      catchError(this.handleError<Comment>('searchComments')
+    ))
+  }
 }

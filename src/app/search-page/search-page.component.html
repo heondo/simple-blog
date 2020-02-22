@@ -2,10 +2,10 @@
     <form>
         <mat-form-field>
             <mat-label>Search Thoughts</mat-label>
-            <input name="blogText" required minlength="30" maxLength="1000" matInput #blogText placeholder="Ex. It makes me feel...">
+            <input name="searchQuery" (input)="search(searchQuery.value)" required minlength="3" maxLength="200" matInput #searchQuery placeholder="Ex. It makes me feel...">
         </mat-form-field>
-        <div>
-            <button mat-flat-button color="primary" (click)="submitPost(blogText.value, $event);">Submit your post</button>
-        </div>
     </form>
+</div>
+<div *ngIf="!blogs$">
+    See what people have to say
 </div>
