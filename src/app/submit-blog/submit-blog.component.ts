@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {BlogService} from '../blog.service';
-import {Blog} from '../blog'
+// import {Blog} from '../blog';
 
 @Component({
   selector: 'app-submit-blog',
@@ -10,7 +10,7 @@ import {Blog} from '../blog'
 })
 export class SubmitBlogComponent implements OnInit {
 
-  contructor(private blogService: BlogService, private router: Router) { }
+  constructor(private blogService: BlogService, private router: Router) {}
 
   submitPost(blogText: string, $event): void {
     $event.preventDefault();

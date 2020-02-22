@@ -12,4 +12,13 @@ a {
 .toolbar {
     display: flex;
     justify-content: space-between;
+    .aligned {
+        display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+        mat-icon {
+            margin-left: .5rem;
+        }
+    }
 }

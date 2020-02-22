@@ -16,13 +16,15 @@ import {MatCardModule} from '@angular/material/card';
 import { SubmitBlogComponent } from './submit-blog/submit-blog.component';
 import { BlogsListComponent } from './blogs-list/blogs-list.component';
 import { BlogPostComponent } from './blog-post/blog-post.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SubmitBlogComponent,
     BlogsListComponent,
-    BlogPostComponent
+    BlogPostComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
