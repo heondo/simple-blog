@@ -130,7 +130,7 @@ router.get('/search', async (req, res, next) => {
         console.log(searchTerm);
         res.json({
             success: true,
-            data: 'a request was received'
+            data: ['something']
         })
     } catch (error) {
         if (!res.statusCode) {

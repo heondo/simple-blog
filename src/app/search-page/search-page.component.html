@@ -2,10 +2,14 @@
     <form>
         <mat-form-field>
             <mat-label>Search Thoughts</mat-label>
-            <input name="searchQuery" (input)="search(searchQuery.value)" required minlength="3" maxLength="200" matInput #searchQuery placeholder="Ex. It makes me feel...">
+            <!-- <input #searchQuery id="search-box" (input)="search(searchQuery.value)" /> -->
+            <input matInput name="searchQuery" (input)="search(searchQuery.value)" #searchQuery placeholder="Ex. It makes me feel...">
         </mat-form-field>
     </form>
 </div>
-<div *ngIf="!blogs$">
-    See what people have to say
+<div *ngIf="blogs$; else elseBlock">
+    Some blogs are found
 </div>
+<ng-template #elseBlock>
+    No blogs were found or searched
+</ng-template>

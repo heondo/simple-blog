@@ -89,8 +89,8 @@ export class BlogService {
     )
   }
 
-  searchBlogs(searchTerm: string) {
-    console.log(searchTerm)
+  searchBlogs(searchTerm: string): Observable<any> {
+    console.log(searchTerm);
     const searchURL = this.blogsURL + `/search?q=${searchTerm}`;
     return this.http.get(searchURL).pipe(
       tap(res => {

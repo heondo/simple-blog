@@ -12,7 +12,7 @@ import {BlogService} from '../blog.service';
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit {
-  blogs$: any;
+  blogs$: Observable<any>;
   private searchTerm = new Subject<string>();
 
   constructor(private blogService: BlogService) { }
@@ -26,7 +26,6 @@ export class SearchPageComponent implements OnInit {
   }
 
   search(term: string): void {
-    // console.log(term)
     this.searchTerm.next(term);
   }
 
