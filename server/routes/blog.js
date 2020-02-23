@@ -4,6 +4,55 @@ const client = require('../db_connect');
 
 router.use(express.json());
 
+router.post('/comment/', async (req, res, next) => {
+    try {
+        const {postID, content} = req.body;
+        if (!postID || !content.trim() || content.length <= 4) {
+            res.status(403);
+            throw new Error("Invalid postid or comment content");
+        }
+        const query = {
+            name: "new-comment",
+            text: "insert into comments (posts_id, date_created, content) values ($1, NOW(), $2) returning id, date_created, content",
+            values: [postID, content]
+        }
+        const result = await client.query(query);
+        if (!result.rowCount) {
+            res.statusCode(404);
+            throw new Error("Couldn't insert comment into db");
+        }
+        res.status(200);
+        // TODO: I think i am getting scared creating the front end and backend with constantly
+        // testing and collaborating, so this should be good practice
+        res.json({
+            success: true,
+            comment: result.rows[0]
+        })
+    } catch(error) {
+        if (!res.statusCode) {
+            res.status(500);
+        }
+        return next(error);
+    }
+});
+
+router.get('/search/', async (req, res, next) => {
+    try {
+        const {q: searchTerm} = req.query;
+        if (!q.trim()) {
+            res.status(404);
+            throw new Error('Empty strings not allowed');
+        }
+        
+    } catch (error) {
+        if (!res.statusCode) {
+            res.status(500);
+        }
+        return next(error);
+    }
+})
+
+
 router.get('/', async (req, res, next) => {
     try {
         const query = {
@@ -28,6 +77,7 @@ router.get('/', async (req, res, next) => {
         return next(error);
     }
 });
+
 
 router.get('/:id', async (req, res, next) => {
     try {
@@ -92,52 +142,5 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.post('/comment', async (req, res, next) => {
-    try {
-        const {postID, content} = req.body;
-        if (!postID || !content.trim() || content.length <= 4) {
-            res.status(403);
-            throw new Error("Invalid postid or comment content");
-        }
-        const query = {
-            name: "new-comment",
-            text: "insert into comments (posts_id, date_created, content) values ($1, NOW(), $2) returning id, date_created, content",
-            values: [postID, content]
-        }
-        const result = await client.query(query);
-        if (!result.rowCount) {
-            res.statusCode(404);
-            throw new Error("Couldn't insert comment into db");
-        }
-        res.status(200);
-        // TODO: I think i am getting scared creating the front end and backend with constantly
-        // testing and collaborating, so this should be good practice
-        res.json({
-            success: true,
-            comment: result.rows[0]
-        })
-    } catch(error) {
-        if (!res.statusCode) {
-            res.status(500);
-        }
-        return next(error);
-    }
-});
-
-router.get('/search', async (req, res, next) => {
-    try {
-        const {q: searchTerm} = req.params;
-        console.log(searchTerm);
-        res.json({
-            success: true,
-            data: ['something']
-        })
-    } catch (error) {
-        if (!res.statusCode) {
-            res.status(500);
-        }
-        return next(error);
-    }
-})
 
 module.exports = router;
