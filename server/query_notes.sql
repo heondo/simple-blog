@@ -71,13 +71,14 @@ with main as (
       'id', main.id, 'comment', main.content, 
       'matches', matches
     )
-  ) matching_comments 
+  ) matching_comments,
+	count(*) num_comments
 from 
   main 
 group by 
   posts_id
 )
-select p.id, p.date_created, p.content, mc.matching_comments from posts p left join mc on mc.posts_id = p.id
+select p.id, p.date_created, p.content, mc.matching_comments, mc.num_comments from posts p left join mc on mc.posts_id = p.id
 where to_tsvector(p.content) @@ to_tsquery('values') or mc.matching_comments is not null
 
 -- combined query with blog thoughts search, will then add column for matched thought text. That should be sufficient to send data forward to the front end and display at that point
